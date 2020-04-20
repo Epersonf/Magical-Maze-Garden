@@ -29,6 +29,7 @@ public class UserInput : MonoBehaviour
 
     private void Update()
     {
+        if (CharacterComponent.SelectedCharacter.characterInformation.aiControlled) return;
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         float move = Input.GetAxis("Fire2");

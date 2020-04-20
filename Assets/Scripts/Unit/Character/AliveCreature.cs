@@ -1,22 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class AliveCreature : UnitComponent
 {
 
+    public Action changeLifeEvent;
+
     #region life
-    private int life = 0;
+    private int Life = 0;
+    public int life
+    {
+        get => Life;
+    }
 
     public void ChangeLife(int change)
     {
-        life += change;
-        if (life <= 0) Kill();
+        Life += change;
+        if (Life <= 0) Kill();
+        if (changeLifeEvent != null)
+            changeLifeEvent();
     }
 
     public void SetLife(int lifeSet)
     {
-        life = lifeSet;
+        Life = lifeSet;
     }
 
     #endregion

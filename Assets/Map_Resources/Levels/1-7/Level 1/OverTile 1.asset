@@ -15,6 +15,6 @@ MonoBehaviour:
   charactersInGame:
   - characterObject: {fileID: 11400000, guid: ff46a04c440757f4dbbcc05ff3885b84, type: 2}
     tile: {x: 0, y: 0}
-  - characterObject: {fileID: 11400000, guid: 3821f5250aa43dd448f8a3979236f9d0, type: 2}
+  - characterObject: {fileID: 11400000, guid: c72597a0d95112945acc9255eebd1290, type: 2}
     tile: {x: 9, y: 9}
   eventsInGame: []

@@ -120,7 +120,8 @@ public class CharacterComponent : AliveCreature
         moving = true;
         if (TileComponent.SelectedTile != null)
             TileComponent.SelectedTile.Unselect();
-        GetComponent<Animator>().SetBool("moving", true);
+        if (GetComponent<Animator>() != null)
+            GetComponent<Animator>().SetBool("moving", true);
         StartAction();
     }
 
@@ -139,7 +140,8 @@ public class CharacterComponent : AliveCreature
         {
             movementTarget.AttachCharacter(this);
             moving = false;
-            GetComponent<Animator>().SetBool("moving", false);
+            if (GetComponent<Animator>() != null)
+                GetComponent<Animator>().SetBool("moving", false);
             EndAction();
         }
     }
@@ -164,7 +166,8 @@ public class CharacterComponent : AliveCreature
     {
         if (!CanAttack()) return;
         attacking = true;
-        GetComponent<Animator>().SetTrigger("attacking");
+        if (GetComponent<Animator>() != null)
+            GetComponent<Animator>().SetTrigger("attacking");
         StartAction();
         StartCoroutine(AttackAimed());
     }

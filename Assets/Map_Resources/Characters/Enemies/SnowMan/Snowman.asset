@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82edcf7421453bc45b70499ac8c6368a, type: 3}
+  m_Name: Snowman
+  m_EditorClassIdentifier: 
+  characterName: Snowman
+  faceImage: {fileID: 0}
+  characterPrefab: {fileID: 3562634921671956650, guid: edfdf9d840679994b9f48b05490123ee,
+    type: 3}
+  type: 1
+  hasTurn: 1
+  actionsPerTurn: 1
+  canJump: 0
+  canAttack: 1
+  magicBallPrefab: {fileID: 7652224190303474242, guid: c4fac510458b99242a221fb12b772099,
+    type: 3}
+  magicBallMaterial: {fileID: -7731335867214853813, guid: 09bc6fe774efea248ba51d04973d203f,
+    type: 3}
+  damage: 1
+  life: 2
+  range: 1
+  canInteract: 1
+  aiControlled: 1
+  coreCharacter: 0
