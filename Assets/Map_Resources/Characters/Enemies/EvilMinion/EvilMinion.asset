@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82edcf7421453bc45b70499ac8c6368a, type: 3}
+  m_Name: EvilMinion
+  m_EditorClassIdentifier: 
+  characterName: Evil Minion
+  faceImage: {fileID: 0}
+  characterPrefab: {fileID: 1112656420873269871, guid: 9d500f9e44117d0428ed99f121f7104c,
+    type: 3}
+  type: 1
+  hasTurn: 1
+  actionsPerTurn: 2
+  canJump: 0
+  canAttack: 1
+  magicBallPrefab: {fileID: 2572163212170024938, guid: c0195f5fe58119147ad0a95ab04e6fb8,
+    type: 3}
+  magicBallMaterial: {fileID: 2100000, guid: 57409cc2b6568974698a0c20cd260200, type: 2}
+  damage: 1
+  life: 1
+  range: 3
+  canInteract: 1
+  aiControlled: 1
+  coreCharacter: 0

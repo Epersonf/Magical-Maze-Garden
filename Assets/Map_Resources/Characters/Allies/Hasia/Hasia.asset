@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82edcf7421453bc45b70499ac8c6368a, type: 3}
+  m_Name: Hasia
+  m_EditorClassIdentifier: 
+  characterName: Hasia
+  faceImage: {fileID: 0}
+  characterPrefab: {fileID: 1112656420873269871, guid: 85cdce1153394f04fabd30fd195ef0c4,
+    type: 3}
+  type: 0
+  hasTurn: 1
+  actionsPerTurn: 2
+  canJump: 0
+  canAttack: 1
+  damage: 1
+  life: 1
+  range: 1
+  canInteract: 1
+  aiControlled: 0
+  coreCharacter: 0

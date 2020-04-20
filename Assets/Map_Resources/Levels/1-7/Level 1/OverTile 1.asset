@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca212cef8a585846bb9450935bef479, type: 3}
+  m_Name: OverTile 1
+  m_EditorClassIdentifier: 
+  charactersInGame:
+  - characterObject: {fileID: 11400000, guid: ff46a04c440757f4dbbcc05ff3885b84, type: 2}
+    tile: {x: 0, y: 0}
+  - characterObject: {fileID: 11400000, guid: 3821f5250aa43dd448f8a3979236f9d0, type: 2}
+    tile: {x: 9, y: 9}
+  eventsInGame: []
