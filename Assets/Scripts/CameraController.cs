@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
         get => DestinationRot;
     }
 
-    public void MoveCamera(float side)
+    public void RotateCamera(float side)
     {
         DestinationRot = Quaternion.Euler(0, destinationRot.eulerAngles.y + Mathf.Sign(side) * 90, 0);
     }
@@ -56,6 +56,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        DestinationRot = transform.rotation;
         startPos = transform.position;
         StartScale();
     }
@@ -69,10 +70,10 @@ public class CameraController : MonoBehaviour
 
 
     const float speed = 5f;
-    public void ActualizeFocus()
+    private void ActualizeFocus()
     {
         if (focus == null) return;
-            transform.position = Vector3.Lerp(transform.position, focus.transform.position, speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, focus.transform.position, speed * Time.deltaTime);
     }
 
     public void Focus(GameObject obj)

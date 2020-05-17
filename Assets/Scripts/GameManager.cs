@@ -4,65 +4,57 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    #region high
-    [SerializeField]
-    private float High = 0f;
-    public float high
+    #region Static references setup
+    public static GameManager active;
+    public static CameraController cameraController;
+
+    public void ActualizeStaticReferences()
     {
-        get => High;
+        active = this;
+        cameraController = GameObject.FindGameObjectWithTag("CameraParent").GetComponent<CameraController>();
     }
     #endregion
 
-    #region gridSize
-    [SerializeField]
-    private float GridSize = 0.5f;
-    public float gridSize
+    #region Inherited functions
+    public void Awake()
     {
-        get => GridSize;
+        ActualizeStaticReferences();
+    }
+
+    public void Start()
+    {
+
+    }
+
+    public void Update()
+    {
+        
     }
     #endregion
 
-    public GameLevel currentLevel;
-    public InterfaceUpdater interfaceUpdater;
-    public InterfaceController interfaceController;
+    #region Turn Manager
+    List<CharacterComponent> characters = new List<CharacterComponent>();
 
-    #region int turn = 0; Turn manager
+    public void AddCharacter(CharacterComponent characterComponent)
+    {
+        characters.Add(characterComponent);
+    }
+
+    public CharacterComponent GetPlayingCharacter()
+    {
+        return characters[turn];
+    }
+
+
     private int Turn = 0;
     public int turn
     {
         get => Turn;
         set
         {
-            if (currentLevel.Lost()) GameOver(false);
-            if (currentLevel.Won()) GameOver(true);
-            if (value >= 0 && value < currentLevel.charactersInGameRunning.Count)
-                Turn = value;
-            else
-                Turn = 0;
-            CharacterComponent characterToPlay = currentLevel.charactersInGameRunning[Turn];
-            GameObject.FindGameObjectWithTag("CameraParent").GetComponent<CameraController>().Focus(characterToPlay.gameObject);
-            if (!characterToPlay.characterInformation.hasTurn)
-            {
-                turn++;
-                return;
-            }
-            characterToPlay.Select();
-            interfaceUpdater.UpdateInterface();
+            if (value >= 0 && value < characters.Count) Turn = value;
+            else Turn = 0;
         }
     }
     #endregion
-
-    void Awake()
-    {
-        currentLevel.Generate(this);
-    }
-    private void Start()
-    {
-        turn = 0;
-    }
-
-    public void GameOver(bool won)
-    {
-        Debug.LogError("Victory: " + won);
-    }
 }
