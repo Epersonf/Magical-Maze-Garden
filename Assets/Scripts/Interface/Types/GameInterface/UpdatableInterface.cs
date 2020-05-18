@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpdatableInterface : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Text turnInfo;
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateTurn()
     {
-        
+        CharacterComponent actual = GameManager.active.GetPlayingCharacter();
+        turnInfo.text = "Turn of " + actual.name + "\nActions remaining: " + actual.actionsRemaining;
     }
 }

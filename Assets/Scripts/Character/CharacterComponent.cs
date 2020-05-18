@@ -5,46 +5,91 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
-public class CharacterComponent : MonoBehaviour
+public class CharacterComponent : AliveCreature
 {
+    const float margin = 0.4f;
+
     public string characterName = "Emilia";
     public Sprite characterSprite;
     public bool playerControlled = true;
     public int actionsPerTurn = 3;
+    public bool canJump = false;
 
     MovementDetector movementDetector;
     Rigidbody rg;
     Collider clldr;
-    Animator animator;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
-        GameManager.active.AddCharacter(this);
+        base.Awake();
         movementDetector = GetComponentInChildren<MovementDetector>();
         rg = GetComponent<Rigidbody>();
         clldr = GetComponent<Collider>();
-        animator = GetComponent<Animator>();
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
-
+        base.Start();
+        GameManager.active.AddCharacter(this);
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
-        GoToDestination();
+        base.Update();
+        MoveToDestination();
     }
 
-    public void GoToDestination()
+    #region Execute Action System
+    bool executingAction = false;
+    bool moving = false;
+    bool attack = false;
+    #region actionsRemaining
+    int ActionsRemaining = 0;
+    public void ResetActions()
     {
-        if (attachedGround == null) return;
+        ActionsRemaining = actionsPerTurn;
+    }
+    public int actionsRemaining
+    {
+        get => ActionsRemaining;
+    }
+    #endregion
+
+    public bool StartAction()
+    {
+        if (actionsRemaining <= 0) return false;
+        ActionsRemaining--;
+        executingAction = true;
+        return true;
+    }
+
+    public void EndAction()
+    {
+        if (!executingAction) return;
+        executingAction = false;
+        moving = false;
+        attack = false;
+        animator.SetBool("moving", false);
+        if (actionsRemaining > 0)
+            GameManager.interfaceController.updatableInterface.UpdateTurn();
+        else
+            GameManager.active.turn++;
+    }
+
+    public void MoveToDestination()
+    {
+        if (attachedGround == null && moving) return;
         float distance = Vector3.Distance(transform.position, attachedGround.transform.position);
-        if (distance > 0.1f)
+        if (distance > margin)
         {
-            transform.LookAt(attachedGround.characterPosition);
+            Vector3 direction = attachedGround.characterPosition.position - transform.position;
+            animator.SetBool("moving", true);
+            if (rg.velocity.magnitude < 2f)
+                rg.AddForce(direction.normalized * 50 * Time.deltaTime, ForceMode.Impulse);
         }
+        else if (!attack) EndAction();
     }
+    #endregion
 
     #region Assign first ground
     private void OnCollisionEnter(Collision collision)
@@ -64,10 +109,13 @@ public class CharacterComponent : MonoBehaviour
         get => AttachedGround;
         set
         {
+            if (value == null) return;
             if (value.IsOccupied()) return;
+            executingAction = true;
             if (AttachedGround != null)
                 AttachedGround.attachedCharacter = null;
             AttachedGround = value;
+            AttachedGround.attachedCharacter = this;
         }
     }
 
@@ -80,22 +128,49 @@ public class CharacterComponent : MonoBehaviour
     #region Inputs
     public void Move()
     {
-        if (GameManager.active.GetPlayingCharacter() != this) return;
-
+        if (!CanPlay()) return;
+        GroundComponent groundAhead = movementDetector.GetGroundAhead();
+        if (groundAhead == null) return;
+        if (groundAhead.IsOccupied()) return;
+        if (!StartAction()) return;
+        moving = true;
+        attachedGround = groundAhead;
     }
 
     public void Rotate(float hor, float ver)
     {
-        if (GameManager.active.GetPlayingCharacter() != this) return;
+        if (!CanPlay()) return;
+        float[] treatedData = Equalize(hor, ver);
         Vector3 cameraRot = GameManager.cameraController.transform.eulerAngles;
-        Vector3 direction = Quaternion.Euler(cameraRot) * new Vector3(hor, 0, ver);
+        Vector3 direction = Quaternion.Euler(cameraRot) * new Vector3(treatedData[0], 0, treatedData[1]);
+        if (direction.magnitude == 0) return;
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
     public void Attack()
     {
-        if (GameManager.active.GetPlayingCharacter() != this) return;
+        ShooterCharacter shooterCharacter = GetComponent<ShooterCharacter>();
+        if (!CanPlay()) return;
+        if (shooterCharacter == null) return;
+        if (!StartAction()) return;
+        attack = true;
+        animator.SetTrigger("attack");
+        shooterCharacter.SpawnShoot(movementDetector.GetMagicBallOrigin(), movementDetector.GetMagicBallDestination());
+    }
 
+    public bool CanPlay()
+    {
+        return GameManager.active.GetPlayingCharacter() == this && !executingAction && !died && !executingAction;
+    }
+
+    #endregion
+
+    #region Util
+    public static float[] Equalize(float h, float v)
+    {
+        float[] axis = {h, v};
+        _ = Mathf.Abs(h) > Mathf.Abs(v) ? (axis[1] = 0) : (axis[0] = 0);
+        return axis;
     }
     #endregion
 }

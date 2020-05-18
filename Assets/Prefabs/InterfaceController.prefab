@@ -1311,6 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd13606a899d0be48a58b847403f75df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnInfo: {fileID: 3831896165675583068}
 --- !u!1 &3831896166687349692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,7 +1660,7 @@ GameObject:
   - component: {fileID: 3831896166915848673}
   m_Layer: 5
   m_Name: InterfaceController
-  m_TagString: Untagged
+  m_TagString: InterfaceController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

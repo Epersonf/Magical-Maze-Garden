@@ -7,6 +7,8 @@ public class MovementDetector : MonoBehaviour
     [SerializeField]
     Transform MoveDetector;
     [SerializeField]
+    Transform ShootSpawn;
+    [SerializeField]
     Transform AttackRange;
     [SerializeField]
     float range = 0.2f;
@@ -35,17 +37,25 @@ public class MovementDetector : MonoBehaviour
         Gizmos.color = Color.green;
         if (AttackRange != null)
             Gizmos.DrawWireSphere(AttackRange.position, range);
+        Gizmos.color = Color.blue;
+        if (ShootSpawn != null)
+            Gizmos.DrawWireSphere(ShootSpawn.position, range);
     }
 
     public GroundComponent GetGroundAhead()
     {
-        Collider[] colliders = Physics.OverlapSphere(MoveDetector.position, range);
+        Collider[] colliders = Physics.OverlapBox(MoveDetector.position, Vector3.one * range);
         foreach (Collider c in colliders) {
             GroundComponent groundComponent = c.GetComponent<GroundComponent>();
             if (groundComponent != null)
                 return groundComponent;
         }
         return null;
+    }
+
+    public Vector3 GetMagicBallOrigin()
+    {
+        return ShootSpawn.position;
     }
 
     public Vector3 GetMagicBallDestination()
@@ -61,10 +71,21 @@ public class MovementDetector : MonoBehaviour
     {
         GroundComponent groundAhead = GetGroundAhead();
         if (currentHighlighted == groundAhead) return;
-        currentHighlighted.SetHighlight(false);
+        if (currentHighlighted != null)
+            currentHighlighted.SetHighlight(false);
+        if (groundAhead == null) return;
         currentHighlighted = groundAhead;
-        currentHighlighted.SetHighlight(true);
+        if (currentHighlighted.IsOccupied())
+            currentHighlighted.SetHighlight(true, Color.red);
+        else
+            currentHighlighted.SetHighlight(true);
     }
 
+    public void Unhighlight()
+    {
+        if (currentHighlighted == null) return;
+        currentHighlighted.SetHighlight(false);
+        currentHighlighted = null;
+    }
     #endregion
 }

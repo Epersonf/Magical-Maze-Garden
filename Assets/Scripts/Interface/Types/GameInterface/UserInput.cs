@@ -29,6 +29,19 @@ public class UserInput : MonoBehaviour
         Attack.onClick.AddListener(AttackCharacter);
     }
 
+    private void Update()
+    {
+        RotateCharacter(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (Input.GetButton("Fire3"))
+            MoveCharacter();
+        if (Input.GetButton("Fire2"))
+            AttackCharacter();
+        if (Input.GetButtonDown("L1"))
+            RotateCamera(1);
+        if (Input.GetButtonDown("R1"))
+            RotateCamera(-1);
+    }
+
     public bool IsCharacterUserControlled()
     {
         return GameManager.active.GetPlayingCharacter().playerControlled;

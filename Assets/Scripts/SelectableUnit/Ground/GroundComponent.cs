@@ -28,7 +28,7 @@ public class GroundComponent : SelectableUnit
 
     public bool IsOccupied()
     {
-        return attachedCharacter == null;
+        return attachedCharacter != null;
     }
     #endregion
 }

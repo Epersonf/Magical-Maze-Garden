@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
     #region Static references setup
     public static GameManager active;
     public static CameraController cameraController;
+    public static InterfaceController interfaceController;
 
     public void ActualizeStaticReferences()
     {
         active = this;
         cameraController = GameObject.FindGameObjectWithTag("CameraParent").GetComponent<CameraController>();
+        interfaceController = GameObject.FindGameObjectWithTag("InterfaceController").GetComponent<InterfaceController>();
     }
     #endregion
 
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-
+        turn = 0;
     }
 
     public void Update()
@@ -54,6 +56,9 @@ public class GameManager : MonoBehaviour
         {
             if (value >= 0 && value < characters.Count) Turn = value;
             else Turn = 0;
+            characters[turn].ResetActions();
+            interfaceController.updatableInterface.UpdateTurn();
+            cameraController.Focus(characters[turn].gameObject);
         }
     }
     #endregion

@@ -20,9 +20,12 @@ public class InterfaceController : MonoBehaviour
     }
     #endregion
 
-    UserInput userInput;
-    UpdatableInterface updatableInterface;
-    Alert alert;
+    [System.NonSerialized]
+    public UserInput userInput;
+    [System.NonSerialized]
+    public UpdatableInterface updatableInterface;
+    [System.NonSerialized]
+    public Alert alert;
 
     private void Awake()
     {
