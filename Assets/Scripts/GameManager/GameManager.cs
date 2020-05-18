@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         get => Turn;
         set
         {
+            characters[turn].UnhighlightMovementDetector();
             if (value >= 0 && value < characters.Count) Turn = value;
             else Turn = 0;
             characters[turn].ResetActions();

@@ -25,7 +25,7 @@ public class MovementDetector : MonoBehaviour
 
     protected virtual void Update()
     {
-        HighlightGroundAhead();
+
     }
 
     #region GetInfo

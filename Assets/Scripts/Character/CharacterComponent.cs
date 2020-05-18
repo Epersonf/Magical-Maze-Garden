@@ -15,7 +15,14 @@ public class CharacterComponent : AliveCreature
     public int actionsPerTurn = 3;
     public bool canJump = false;
 
+    #region movementDetector
     MovementDetector movementDetector;
+    public void UnhighlightMovementDetector()
+    {
+        movementDetector.Unhighlight();
+    }
+    #endregion
+
     Rigidbody rg;
     Collider clldr;
 
@@ -145,6 +152,7 @@ public class CharacterComponent : AliveCreature
         Vector3 direction = Quaternion.Euler(cameraRot) * new Vector3(treatedData[0], 0, treatedData[1]);
         if (direction.magnitude == 0) return;
         transform.rotation = Quaternion.LookRotation(direction);
+        movementDetector.HighlightGroundAhead();
     }
 
     public void Attack()
