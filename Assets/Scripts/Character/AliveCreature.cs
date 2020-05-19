@@ -49,6 +49,5 @@ public class AliveCreature : MonoBehaviour
     public virtual void Die()
     {
         Died = true;
-        
     }
 }

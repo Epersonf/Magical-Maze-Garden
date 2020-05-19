@@ -37,9 +37,21 @@ public class GameManager : MonoBehaviour
     #region Turn Manager
     List<CharacterComponent> characters = new List<CharacterComponent>();
 
+    public List<CharacterComponent> GetCharacters()
+    {
+        return characters;
+    }
+
     public void AddCharacter(CharacterComponent characterComponent)
     {
         characters.Add(characterComponent);
+    }
+
+    public void RemoveCharacter(CharacterComponent characterComponent)
+    {
+        CharacterComponent current = GetPlayingCharacter();
+        characters.Remove(characterComponent);
+        Turn = characters.IndexOf(current);
     }
 
     public CharacterComponent GetPlayingCharacter()

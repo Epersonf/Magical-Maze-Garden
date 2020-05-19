@@ -65,6 +65,7 @@ public class CharacterComponent : AliveCreature
     public bool StartAction()
     {
         if (actionsRemaining <= 0) return false;
+        movementDetector.HighlightGroundAhead();
         ActionsRemaining--;
         executingAction = true;
         return true;
@@ -77,6 +78,7 @@ public class CharacterComponent : AliveCreature
         moving = false;
         attack = false;
         animator.SetBool("moving", false);
+        movementDetector.HighlightGroundAhead();
         if (actionsRemaining > 0)
             GameManager.interfaceController.updatableInterface.UpdateTurn();
         else
@@ -85,14 +87,15 @@ public class CharacterComponent : AliveCreature
 
     public void MoveToDestination()
     {
-        if (attachedGround == null && moving) return;
+        if (attachedGround == null) return;
         float distance = Vector3.Distance(transform.position, attachedGround.transform.position);
         if (distance > margin)
         {
-            Vector3 direction = attachedGround.characterPosition.position - transform.position;
-            animator.SetBool("moving", true);
+            Vector3 destination = attachedGround.characterPosition.position;
+            destination.y = transform.position.y;
+            Vector3 direction = destination - transform.position;
             if (rg.velocity.magnitude < 2f)
-                rg.AddForce(direction.normalized * 50 * Time.deltaTime, ForceMode.Impulse);
+                rg.AddForce(direction.normalized * 10 * Time.deltaTime, ForceMode.Impulse);
         }
         else if (!attack) EndAction();
     }
@@ -140,6 +143,8 @@ public class CharacterComponent : AliveCreature
         if (groundAhead == null) return;
         if (groundAhead.IsOccupied()) return;
         if (!StartAction()) return;
+        animator.SetBool("moving", true);
+        animator.SetBool("mirror", !animator.GetBool("mirror"));
         moving = true;
         attachedGround = groundAhead;
     }
@@ -169,6 +174,14 @@ public class CharacterComponent : AliveCreature
     public bool CanPlay()
     {
         return GameManager.active.GetPlayingCharacter() == this && !executingAction && !died && !executingAction;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        GameManager.active.RemoveCharacter(this);
+        animator.SetTrigger("die");
+        Destroy(this.gameObject, 4);
     }
 
     #endregion

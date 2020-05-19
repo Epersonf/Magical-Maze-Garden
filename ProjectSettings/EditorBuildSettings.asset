@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Levels/Level1.unity
+    path: Assets/Scenes/Levels/SpringMap/Spring.unity
     guid: 1e3c5197063106b46b91a7dbe55e4d96
   m_configObjects: {}

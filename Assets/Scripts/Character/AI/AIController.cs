@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CharacterComponent))]
 public class AIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public CharacterComponent characterComponent;
+    public NavMeshAgent navMeshAgent;
+    private void Awake()
     {
-        
+        characterComponent = GetComponent<CharacterComponent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public CharacterComponent FindClosestEnemy()
     {
-        
+        return null;
     }
 }

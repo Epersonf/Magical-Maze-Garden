@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 public class ShootComponent : MonoBehaviour
 {
@@ -31,9 +32,7 @@ public class ShootComponent : MonoBehaviour
     {
         AliveCreature aliveCreature = collision.transform.GetComponent<AliveCreature>();
         if (aliveCreature != null)
-        {
             aliveCreature.DealDamage(damage);
-        }
         End();
     }
 
