@@ -14,6 +14,7 @@ public class CharacterComponent : AliveCreature
     public bool playerControlled = true;
     public int actionsPerTurn = 3;
     public bool canJump = false;
+    public int team = 0;
 
     #region movementDetector
     MovementDetector movementDetector;
@@ -173,7 +174,7 @@ public class CharacterComponent : AliveCreature
 
     public bool CanPlay()
     {
-        return GameManager.active.GetPlayingCharacter() == this && !executingAction && !died && !executingAction;
+        return GameManager.active.GetPlayingCharacter() == this && !executingAction && !died && !executingAction && !GameManager.cameraController.rotating;
     }
 
     public override void Die()

@@ -44,12 +44,19 @@ public class CameraController : MonoBehaviour
     public void RotateCamera(float side)
     {
         DestinationRot = Quaternion.Euler(0, destinationRot.eulerAngles.y + Mathf.Sign(side) * 90, 0);
+        rotating = true;
     }
 
     public float movementSpeed = 10f;
+    public bool rotating = false;
     private void ActualizeRotation()
     {
-        if (Quaternion.Angle(transform.rotation, destinationRot) == 0) return;
+        if (!rotating) return;
+        if (Quaternion.Angle(transform.rotation, destinationRot) == 0)
+        {
+            rotating = false;
+            return;
+        }
         transform.rotation = Quaternion.RotateTowards(transform.rotation, destinationRot, movementSpeed * Time.deltaTime);
     }
     #endregion
