@@ -165,11 +165,11 @@ public class CharacterComponent : AliveCreature
     {
         ShooterCharacter shooterCharacter = GetComponent<ShooterCharacter>();
         if (!CanPlay()) return;
-        if (shooterCharacter == null) return;
+        if (!shooterCharacter) return;
         if (!StartAction()) return;
         attack = true;
         animator.SetTrigger("attack");
-        shooterCharacter.SpawnShoot(movementDetector.GetMagicBallOrigin(), movementDetector.GetMagicBallDestination());
+        shooterCharacter.SpawnShoot(movementDetector.GetMagicBallOrigin(), movementDetector.GetMagicBallDestination(), movementDetector.GetGroundAhead());
     }
 
     public bool CanPlay()

@@ -12,6 +12,7 @@ public class ShooterCharacter : MonoBehaviour
     public float speed = 5f;
     public float delay = 0.3f;
     public Action EndTurn;
+    public bool ranged = true;
 
     private void Awake()
     {
@@ -19,9 +20,19 @@ public class ShooterCharacter : MonoBehaviour
         EndTurn += emissor.EndAction;
     }
 
-    public void SpawnShoot(Vector3 origin, Vector3 destination)
+    public void SpawnShoot(Vector3 origin, Vector3 destination, GroundComponent groundAhead)
     {
-        StartCoroutine(SpawnShoot(origin, destination, delay));
+        if (ranged)
+            StartCoroutine(SpawnShoot(origin, destination, delay));
+        else
+            StartCoroutine(HitAhead(groundAhead.attachedCharacter, delay));
+    }
+
+    public IEnumerator HitAhead(CharacterComponent characterComponent, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        characterComponent.DealDamage(damage);
+        EndTurn();
     }
 
     public IEnumerator SpawnShoot(Vector3 origin, Vector3 destination, float delay)
