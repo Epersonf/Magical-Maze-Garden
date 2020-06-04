@@ -35,26 +35,26 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Turn Manager
-    List<CharacterComponent> characters = new List<CharacterComponent>();
+    List<TurnManager> characters = new List<TurnManager>();
 
-    public List<CharacterComponent> GetCharacters()
+    public List<TurnManager> GetCharacters()
     {
         return characters;
     }
 
-    public void AddCharacter(CharacterComponent characterComponent)
+    public void AddCharacter(TurnManager characterComponent)
     {
         characters.Add(characterComponent);
     }
 
-    public void RemoveCharacter(CharacterComponent characterComponent)
+    public void RemoveCharacter(TurnManager characterComponent)
     {
-        CharacterComponent current = GetPlayingCharacter();
+        TurnManager current = GetPlayingCharacter();
         characters.Remove(characterComponent);
         Turn = characters.IndexOf(current);
     }
 
-    public CharacterComponent GetPlayingCharacter()
+    public TurnManager GetPlayingCharacter()
     {
         return characters[turn];
     }
@@ -66,13 +66,22 @@ public class GameManager : MonoBehaviour
         get => Turn;
         set
         {
-            characters[turn].UnhighlightMovementDetector();
             if (value >= 0 && value < characters.Count) Turn = value;
             else Turn = 0;
-            characters[turn].ResetActions();
-            interfaceController.updatableInterface.UpdateTurn();
+            GetPlayingCharacter().SendMessage("StartTurn");
             cameraController.Focus(characters[turn].gameObject);
+            UpdateInterface();
         }
+    }
+
+    public void UpdateInterface()
+    {
+        interfaceController.updatableInterface.UpdateTurn();
+    }
+
+    private void PassTurn()
+    {
+        turn++;
     }
     #endregion
 }

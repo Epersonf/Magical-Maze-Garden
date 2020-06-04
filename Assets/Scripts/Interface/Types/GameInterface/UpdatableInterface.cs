@@ -9,7 +9,8 @@ public class UpdatableInterface : MonoBehaviour
 
     public void UpdateTurn()
     {
-        CharacterComponent actual = GameManager.active.GetPlayingCharacter();
-        turnInfo.text = "Turn of " + actual.name + "\nActions remaining: " + actual.actionsRemaining;
+        TurnManager actual = GameManager.active.GetPlayingCharacter();
+        if (actual)
+            turnInfo.text = "Turn of " + actual.name + "\nActions remaining: " + actual.actionsRemaining;
     }
 }

@@ -14,21 +14,18 @@ public class AliveCreature : MonoBehaviour
     private int Life;
     public int maxLife = 1;
 
-    protected Animator animator;
-
     #region Inherited functions
-    protected virtual void Awake()
+    public void Awake()
     {
         Life = maxLife;
-        animator = GetComponent<Animator>();
     }
 
-    protected virtual void Start()
+    public void Start()
     {
 
     }
     
-    protected virtual void Update()
+    public void Update()
     {
 
     }

@@ -16,14 +16,15 @@ public class GroundComponent : SelectableUnit
     }
 
     #region Occupied
-    private CharacterComponent AttachedCharacter;
-    public CharacterComponent attachedCharacter
+    private TurnManager AttachedCharacter;
+    public TurnManager attachedCharacter
     {
         get => AttachedCharacter;
-        set
-        {
-            AttachedCharacter = value;
-        }
+    }
+
+    public void AttachCharacter(TurnManager character)
+    {
+        AttachedCharacter = character;
     }
 
     public bool IsOccupied()

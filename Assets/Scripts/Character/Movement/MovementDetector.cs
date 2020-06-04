@@ -33,7 +33,7 @@ public class MovementDetector : MonoBehaviour
     {
         Gizmos.color = Color.red;
         if (MoveDetector != null)
-            Gizmos.DrawWireCube(MoveDetector.position, Vector3.one * range);
+            Gizmos.DrawWireCube(MoveDetector.position, MoveDetector.localScale);
         Gizmos.color = Color.green;
         if (AttackRange != null)
             Gizmos.DrawWireSphere(AttackRange.position, range);
@@ -44,7 +44,7 @@ public class MovementDetector : MonoBehaviour
 
     public GroundComponent GetGroundAhead()
     {
-        Collider[] colliders = Physics.OverlapBox(MoveDetector.position, Vector3.one * range);
+        Collider[] colliders = Physics.OverlapBox(MoveDetector.position, MoveDetector.localScale);
         foreach (Collider c in colliders) {
             GroundComponent groundComponent = c.GetComponent<GroundComponent>();
             if (groundComponent != null)

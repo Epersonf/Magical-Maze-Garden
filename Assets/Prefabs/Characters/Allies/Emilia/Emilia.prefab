@@ -214,10 +214,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7811642834287735634}
   - component: {fileID: 4956287368125008780}
-  - component: {fileID: 6762885826127331410}
+  - component: {fileID: 4259279068880881384}
   - component: {fileID: 5645897001523776555}
-  - component: {fileID: 6291963196136872728}
+  - component: {fileID: 6949513912111957574}
   - component: {fileID: 8125798034622399913}
+  - component: {fileID: 9138813658381912811}
+  - component: {fileID: 3832718266021028689}
+  - component: {fileID: 3547835954508817463}
   m_Layer: 0
   m_Name: Emilia
   m_TagString: Untagged
@@ -259,22 +262,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &6762885826127331410
-Rigidbody:
+--- !u!143 &4259279068880881384
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112656420873269871}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  m_Height: 4
+  m_Radius: 1
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!136 &5645897001523776555
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -289,24 +294,28 @@ CapsuleCollider:
   m_Height: 4.243744
   m_Direction: 1
   m_Center: {x: 0, y: 1.621872, z: 0}
---- !u!114 &6291963196136872728
-MonoBehaviour:
+--- !u!195 &6949513912111957574
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112656420873269871}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c90fb222b2abd0b468a1170538e33dc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLife: 1
-  characterName: Emilia
-  characterSprite: {fileID: 0}
-  playerControlled: 1
-  actionsPerTurn: 3
-  canJump: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &8125798034622399913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,10 +328,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17312455b3a39849b88f676d1ef163e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 0
   prefab: {fileID: 2572163212170024938, guid: c0195f5fe58119147ad0a95ab04e6fb8, type: 3}
   damage: 1
   speed: 5
   delay: 0.8
+  ranged: 1
+--- !u!114 &9138813658381912811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112656420873269871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a197dbebaab97de499d19db98360cb65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 1
+--- !u!114 &3832718266021028689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112656420873269871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9ffe3434a9b4541b2a3c1d6e364ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3547835954508817463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112656420873269871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac0b3df600f5ac469f4b4d3cf7f9072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Emilia
+  characterSprite: {fileID: 0}
+  playerControlled: 1
+  actionsPerTurn: 3
 --- !u!1 &1132658702915215124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,7 +2145,7 @@ PrefabInstance:
         type: 3}
       propertyPath: characterComponent
       value: 
-      objectReference: {fileID: 6291963196136872728}
+      objectReference: {fileID: 0}
     - target: {fileID: 5604868184498934326, guid: 90c0532cb68191a45b37c1641b0a723d,
         type: 3}
       propertyPath: m_Name

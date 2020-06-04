@@ -463,13 +463,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 373866102149415253}
-  - component: {fileID: 5370061809339600543}
   - component: {fileID: 320658224574206897}
+  - component: {fileID: 6036464909384049333}
   - component: {fileID: 3072874834361976924}
   - component: {fileID: 1201152201415049263}
   - component: {fileID: 8750902930803834102}
   - component: {fileID: 5621555174255184391}
   - component: {fileID: 6390202676968921510}
+  - component: {fileID: 7968918996706861408}
+  - component: {fileID: 5675580320748071400}
   m_Layer: 0
   m_Name: TreeEnemy
   m_TagString: Untagged
@@ -492,22 +494,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &5370061809339600543
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3705166056839181126}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!136 &320658224574206897
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -522,6 +508,24 @@ CapsuleCollider:
   m_Height: 7.609639
   m_Direction: 1
   m_Center: {x: 0, y: 3.7744942, z: -0.2560377}
+--- !u!143 &6036464909384049333
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705166056839181126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 8
+  m_Radius: 2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 4, z: 0}
 --- !u!95 &3072874834361976924
 Animator:
   serializedVersion: 3
@@ -550,16 +554,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3705166056839181126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c90fb222b2abd0b468a1170538e33dc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ac0b3df600f5ac469f4b4d3cf7f9072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 1
-  characterName: Tree
+  characterName: TreeEnemy
   characterSprite: {fileID: 0}
   playerControlled: 1
   actionsPerTurn: 3
-  canJump: 0
-  team: 0
 --- !u!195 &8750902930803834102
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -567,7 +568,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3705166056839181126}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -606,11 +607,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17312455b3a39849b88f676d1ef163e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 0
   prefab: {fileID: 0}
   damage: 1
   speed: 5
   delay: 0.3
   ranged: 0
+--- !u!114 &7968918996706861408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705166056839181126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a197dbebaab97de499d19db98360cb65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 1
+--- !u!114 &5675580320748071400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705166056839181126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9ffe3434a9b4541b2a3c1d6e364ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3813243296635762222
 GameObject:
   m_ObjectHideFlags: 0

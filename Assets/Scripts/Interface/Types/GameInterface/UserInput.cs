@@ -32,9 +32,9 @@ public class UserInput : MonoBehaviour
     private void Update()
     {
         RotateCharacter(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        if (Input.GetButton("Fire3"))
+        if (Input.GetButtonDown("Fire3"))
             MoveCharacter();
-        if (Input.GetButton("Fire2"))
+        if (Input.GetButtonDown("Fire2"))
             AttackCharacter();
         if (Input.GetButtonDown("L1"))
             RotateCamera(1);
@@ -44,7 +44,13 @@ public class UserInput : MonoBehaviour
 
     public bool IsCharacterUserControlled()
     {
-        return GameManager.active.GetPlayingCharacter().playerControlled;
+        try
+        {
+            return GameManager.active.GetPlayingCharacter().playerControlled;
+        } catch(System.ArgumentOutOfRangeException)
+        {
+            return false;
+        }
     }
 
     public void RotateCamera(float side)
@@ -55,21 +61,21 @@ public class UserInput : MonoBehaviour
     public void RotateCharacter(float hor, float ver)
     {
         if (!IsCharacterUserControlled()) return;
-        CharacterComponent characterComponent = GameManager.active.GetPlayingCharacter();
-        characterComponent.Rotate(hor, ver);
+        TurnManager characterComponent = GameManager.active.GetPlayingCharacter();
+        characterComponent.gameObject.SendMessage("Rotate", new float[] { hor, ver }, SendMessageOptions.DontRequireReceiver);
     }
 
     public void MoveCharacter()
     {
         if (!IsCharacterUserControlled()) return;
-        CharacterComponent characterComponent = GameManager.active.GetPlayingCharacter();
-        characterComponent.Move();
+        TurnManager characterComponent = GameManager.active.GetPlayingCharacter();
+        characterComponent.gameObject.SendMessage("Move", SendMessageOptions.DontRequireReceiver);
     }
 
     public void AttackCharacter()
     {
         if (!IsCharacterUserControlled()) return;
-        CharacterComponent characterComponent = GameManager.active.GetPlayingCharacter();
-        characterComponent.Attack();
+        TurnManager characterComponent = GameManager.active.GetPlayingCharacter();
+        characterComponent.gameObject.SendMessage("Attack", SendMessageOptions.DontRequireReceiver);
     }
 }

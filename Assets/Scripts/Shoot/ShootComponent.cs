@@ -8,17 +8,14 @@ using UnityEngine;
 public class ShootComponent : MonoBehaviour
 {
     private Vector3 destination;
-    private int damage = 1;
     private float speed = 5f;
-    private Action EndTurn;
+    private ShooterCharacter emissor;
     public float margin = 0.4f;
 
-    public void SetDestination(int damage, float speed, Vector3 destination, Action EndTurn)
+    public void SetDestination(Vector3 destination, ShooterCharacter emissor)
     {
-        this.damage = damage;
-        this.speed = speed;
         this.destination = destination;
-        this.EndTurn = EndTurn;
+        this.emissor = emissor;
     }
 
     private void Update()
@@ -30,15 +27,13 @@ public class ShootComponent : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        AliveCreature aliveCreature = collision.transform.GetComponent<AliveCreature>();
-        if (aliveCreature != null)
-            aliveCreature.DealDamage(damage);
+        collision.gameObject.SendMessage("DealDamage", emissor.damage);
         End();
     }
 
     public void End()
     {
-        EndTurn();
         Destroy(this.gameObject);
+        emissor.gameObject.SendMessage("EndAction");
     }
 }
