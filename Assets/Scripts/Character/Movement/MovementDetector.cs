@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovementDetector : MonoBehaviour
 {
+    #pragma warning disable 649
     [SerializeField]
     Transform MoveDetector;
     [SerializeField]
@@ -81,7 +82,7 @@ public class MovementDetector : MonoBehaviour
             currentHighlighted.SetHighlight(true);
     }
 
-    public void Unhighlight()
+    public void UnhighlightGroundAhead()
     {
         if (currentHighlighted == null) return;
         currentHighlighted.SetHighlight(false);

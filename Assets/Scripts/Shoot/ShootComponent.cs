@@ -27,7 +27,10 @@ public class ShootComponent : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        collision.gameObject.SendMessage("DealDamage", emissor.damage);
+        ShooterCharacter shooter = collision.gameObject.GetComponent<ShooterCharacter>();
+        if (shooter)
+            if (emissor.team != shooter.team)
+                collision.gameObject.SendMessage("DealDamage", emissor.damage, SendMessageOptions.DontRequireReceiver);
         End();
     }
 

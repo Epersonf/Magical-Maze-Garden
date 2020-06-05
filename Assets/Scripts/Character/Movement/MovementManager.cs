@@ -32,11 +32,12 @@ public class MovementManager : MonoBehaviour
     private void Update()
     {
         if (!moving) return;
-        characterController.Move(navMeshAgent.desiredVelocity * Time.deltaTime);
-        if (navMeshAgent.remainingDistance < 0.1f)
+        SendMessage("OnMoveEvent", SendMessageOptions.DontRequireReceiver);
+        if (XZDistance(transform.position, navMeshAgent.destination) < 0.1f)
         {
             movementDetector.gameObject.SendMessage("HighlightGroundAhead", SendMessageOptions.DontRequireReceiver);
             SendMessage("EndAction");
+            SendMessage("OnIdleEvent", SendMessageOptions.DontRequireReceiver);
             moving = false;
         }
     }
@@ -47,10 +48,18 @@ public class MovementManager : MonoBehaviour
         GroundComponent groundAhead = movementDetector.GetGroundAhead();
         if (groundAhead == null) return;
         if (groundAhead.IsOccupied()) return;
-        groundAhead.SendMessage("AttachCharacter", turnManager);
-        moving = true;
-        SendMessage("StartAction");
         navMeshAgent.SetDestination(groundAhead.transform.position);
+        moving = true;
+        AttachGround(groundAhead);
+        SendMessage("StartAction");
+    }
+
+    public void AttachGround(GroundComponent groundComponent)
+    {
+        if (attachedGround)
+            attachedGround.gameObject.SendMessage("DettachCharacter");
+        groundComponent.SendMessage("AttachCharacter", turnManager);
+        AttachedGround = groundComponent;
     }
 
     public void Rotate(float[] param)
@@ -58,7 +67,9 @@ public class MovementManager : MonoBehaviour
         if (IsBusy()) return;
         float[] treatedData = Equalize(param[0], param[1]);
         Vector3 cameraRot = GameManager.cameraController.transform.eulerAngles;
-        Vector3 direction = Quaternion.Euler(cameraRot) * new Vector3(treatedData[0], 0, treatedData[1]);
+        Vector3 direction = new Vector3(treatedData[0], 0, treatedData[1]);
+        if (turnManager.playerControlled)
+            direction = Quaternion.Euler(cameraRot) * direction;
         if (direction.magnitude == 0) return;
         transform.rotation = Quaternion.LookRotation(direction);
         movementDetector.gameObject.SendMessage("HighlightGroundAhead", SendMessageOptions.DontRequireReceiver);
@@ -66,7 +77,7 @@ public class MovementManager : MonoBehaviour
 
     public bool IsBusy()
     {
-       return !turnManager.IsTurn() || turnManager.executingAction || moving || turnManager.actionsRemaining <= 0;
+       return !turnManager.IsTurn() || turnManager.executingAction || moving || turnManager.actionsRemaining <= 0 || (GameManager.cameraController.rotating && turnManager.playerControlled);
     }
 
     #region Util
@@ -75,6 +86,19 @@ public class MovementManager : MonoBehaviour
         float[] axis = { h, v };
         _ = Mathf.Abs(h) > Mathf.Abs(v) ? (axis[1] = 0) : (axis[0] = 0);
         return axis;
+    }
+
+    /// <summary>
+    /// Returns the distance of two vectors based only on X and Z axis.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public static float XZDistance(Vector3 a, Vector3 b)
+    {
+        a.y = 0;
+        b.y = 0;
+        return Vector3.Distance(a, b);
     }
     #endregion
 }

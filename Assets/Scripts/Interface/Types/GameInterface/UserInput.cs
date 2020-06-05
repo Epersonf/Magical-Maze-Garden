@@ -62,20 +62,21 @@ public class UserInput : MonoBehaviour
     {
         if (!IsCharacterUserControlled()) return;
         TurnManager characterComponent = GameManager.active.GetPlayingCharacter();
-        characterComponent.gameObject.SendMessage("Rotate", new float[] { hor, ver }, SendMessageOptions.DontRequireReceiver);
+
+        characterComponent.gameObject.SendMessage("Rotate", new float[] { hor, ver });
     }
 
     public void MoveCharacter()
     {
         if (!IsCharacterUserControlled()) return;
         TurnManager characterComponent = GameManager.active.GetPlayingCharacter();
-        characterComponent.gameObject.SendMessage("Move", SendMessageOptions.DontRequireReceiver);
+        characterComponent.gameObject.SendMessage("Move");
     }
 
     public void AttackCharacter()
     {
         if (!IsCharacterUserControlled()) return;
         TurnManager characterComponent = GameManager.active.GetPlayingCharacter();
-        characterComponent.gameObject.SendMessage("Attack", SendMessageOptions.DontRequireReceiver);
+        characterComponent.gameObject.SendMessage("Attack");
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(ShooterCharacter))]
 public class TurnManager : MonoBehaviour
 {
     const float margin = 0.4f;
@@ -18,6 +19,7 @@ public class TurnManager : MonoBehaviour
 
     private int ActionsRemaining = 0;
     public int actionsRemaining { get => ActionsRemaining; }
+
 
     private void Start()
     {
@@ -45,10 +47,24 @@ public class TurnManager : MonoBehaviour
         ExecutingAction = false;
         GameManager.active.SendMessage("UpdateInterface");
         if (actionsRemaining <= 0) GameManager.active.SendMessage("PassTurn");
+        else if (!playerControlled) SendMessage("AIPlay");
     }
 
     public void StartTurn()
     {
         ActionsRemaining = actionsPerTurn;
+        if (!playerControlled)
+            SendMessage("AIPlay");
+    }
+
+    public void PassAction()
+    {
+        StartAction();
+        EndAction();
+    }
+
+    public void OnDieEvent()
+    {
+        GameManager.active.RemoveCharacter(this);
     }
 }

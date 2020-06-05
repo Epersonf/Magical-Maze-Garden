@@ -1,18 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Alert : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static Alert active;
+    private Text textUI;
+    public void Awake()
     {
-        
+        active = this;
+        textUI = GetComponent<Text>();
+        textUI.text = "";
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void AlertMessage(string text, float delay)
     {
-        
+        active.textUI.text = text;
+        active.StartCoroutine(EndAlert(delay));
+    }
+
+    private static IEnumerator EndAlert(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        active.textUI.text = "";
     }
 }

@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         get => Turn;
         set
         {
+            GetPlayingCharacter().BroadcastMessage("UnhighlightGroundAhead");
             if (value >= 0 && value < characters.Count) Turn = value;
             else Turn = 0;
             GetPlayingCharacter().SendMessage("StartTurn");
@@ -84,4 +85,9 @@ public class GameManager : MonoBehaviour
         turn++;
     }
     #endregion
+
+    public void GameOver()
+    {
+
+    }
 }

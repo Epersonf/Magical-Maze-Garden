@@ -43,8 +43,10 @@ public class AliveCreature : MonoBehaviour
         DealDamage(-heal);
     }
 
-    public virtual void Die()
+    public void Die()
     {
         Died = true;
+        Destroy(gameObject, 3);
+        gameObject.SendMessage("OnDieEvent", SendMessageOptions.DontRequireReceiver);
     }
 }

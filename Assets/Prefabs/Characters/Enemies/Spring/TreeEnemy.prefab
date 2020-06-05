@@ -280,7 +280,6 @@ GameObject:
   - component: {fileID: 4286945878032775728}
   - component: {fileID: 5390901256795184237}
   - component: {fileID: 4006009009320950081}
-  - component: {fileID: 6282477286966419954}
   m_Layer: 0
   m_Name: Eye2
   m_TagString: Untagged
@@ -349,19 +348,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6282477286966419954
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2670386816568221192}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.49999994
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2880049252701506572
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +458,7 @@ GameObject:
   - component: {fileID: 6390202676968921510}
   - component: {fileID: 7968918996706861408}
   - component: {fileID: 5675580320748071400}
+  - component: {fileID: 3470999295016954025}
   m_Layer: 0
   m_Name: TreeEnemy
   m_TagString: Untagged
@@ -559,7 +546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: TreeEnemy
   characterSprite: {fileID: 0}
-  playerControlled: 1
+  playerControlled: 0
   actionsPerTurn: 3
 --- !u!195 &8750902930803834102
 NavMeshAgent:
@@ -571,7 +558,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -607,11 +594,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17312455b3a39849b88f676d1ef163e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  team: 1
   prefab: {fileID: 0}
   damage: 1
   speed: 5
-  delay: 0.3
+  delay: 5
   ranged: 0
 --- !u!114 &7968918996706861408
 MonoBehaviour:
@@ -636,6 +623,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da9ffe3434a9b4541b2a3c1d6e364ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttachedGround: {fileID: 0}
+--- !u!114 &3470999295016954025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705166056839181126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2656f993a6dc97641993e2931db3b56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3813243296635762222
@@ -1276,10 +1276,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5230592127775765843}
     m_Modifications:
+    - target: {fileID: 1908664266124262512, guid: 90c0532cb68191a45b37c1641b0a723d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1908664266124262512, guid: 90c0532cb68191a45b37c1641b0a723d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.33
+      objectReference: {fileID: 0}
     - target: {fileID: 5604868184498934326, guid: 90c0532cb68191a45b37c1641b0a723d,
         type: 3}
       propertyPath: m_Name
       value: MovementDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523117986760112900, guid: 90c0532cb68191a45b37c1641b0a723d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523117986760112900, guid: 90c0532cb68191a45b37c1641b0a723d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.33
       objectReference: {fileID: 0}
     - target: {fileID: 7105495859374781090, guid: 90c0532cb68191a45b37c1641b0a723d,
         type: 3}

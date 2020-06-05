@@ -27,6 +27,11 @@ public class GroundComponent : SelectableUnit
         AttachedCharacter = character;
     }
 
+    public void DettachCharacter()
+    {
+        AttachedCharacter = null;
+    }
+
     public bool IsOccupied()
     {
         return attachedCharacter != null || groundType == GroundType.Impassable;

@@ -25,6 +25,8 @@ public class ShooterCharacter : MonoBehaviour
     public void Attack()
     {
         if (!turnManager.IsTurn() || turnManager.executingAction) return;
+        SendMessage("OnAttackEvent", SendMessageOptions.DontRequireReceiver);
+        SendMessage("StartAction");
         if (ranged)
             StartCoroutine(SpawnShoot(movementDetector.GetMagicBallOrigin(), movementDetector.GetMagicBallDestination(), delay));
         else
@@ -34,14 +36,13 @@ public class ShooterCharacter : MonoBehaviour
     public IEnumerator HitAhead(TurnManager characterComponent, float delay)
     {
         yield return new WaitForSeconds(delay);
-        if (characterComponent == null) yield break;
-        characterComponent.gameObject.SendMessage("DealDamage", damage, SendMessageOptions.DontRequireReceiver);
-        SendMessage("StartAction");
+        if (characterComponent && team != characterComponent.GetComponent<ShooterCharacter>().team)
+            characterComponent.gameObject.SendMessage("DealDamage", damage, SendMessageOptions.DontRequireReceiver);
+        SendMessage("EndAction");
     }
 
     public IEnumerator SpawnShoot(Vector3 origin, Vector3 destination, float delay)
     {
-        SendMessage("StartAction");
         yield return new WaitForSeconds(delay);
         GameObject shoot = Instantiate(prefab, origin, Quaternion.identity);
         shoot.GetComponent<ShootComponent>().SetDestination(destination, this);
