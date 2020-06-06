@@ -45,7 +45,7 @@ public class ShooterCharacter : MonoBehaviour
     public IEnumerator SpawnShoot(Vector3 origin, Vector3 destination, float delay)
     {
         yield return new WaitForSeconds(delay);
-        GameObject shoot = Instantiate(prefab, origin, Quaternion.identity);
+        GameObject shoot = Instantiate(prefab, origin, transform.rotation);
         shoot.GetComponent<ShootComponent>().SetDestination(destination, this);
     }
 }

@@ -62,6 +62,7 @@ public class AIController : MonoBehaviour
         foreach (RaycastHit h in hit)
         {
             ShooterCharacter enemyShooter = h.transform.GetComponent<ShooterCharacter>();
+            if (enemyShooter == null) continue;
             if (enemyShooter.team == this.shooterCharacter.team) continue;
             if (h.transform.GetComponent<AliveCreature>() != null) return true;
             if (!enemyShooter.passThrough) break;

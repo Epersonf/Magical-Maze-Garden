@@ -57,6 +57,11 @@ public class TurnManager : MonoBehaviour
             SendMessage("AIPlay");
     }
 
+    public void EndTurn()
+    {
+        if (actionsRemaining <= 0) GameManager.active.SendMessage("PassTurn");
+    }
+
     public void PassAction()
     {
         StartAction();

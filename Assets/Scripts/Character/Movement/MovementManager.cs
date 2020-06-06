@@ -65,7 +65,9 @@ public class MovementManager : MonoBehaviour
     public void Rotate(float[] param)
     {
         if (IsBusy()) return;
-        float[] treatedData = Equalize(param[0], param[1]);
+        bool went = false;
+        float[] treatedData = Equalize(param[0], param[1], false);
+    tryagain:
         Vector3 cameraRot = GameManager.cameraController.transform.eulerAngles;
         Vector3 direction = new Vector3(treatedData[0], 0, treatedData[1]);
         if (turnManager.playerControlled)
@@ -73,18 +75,44 @@ public class MovementManager : MonoBehaviour
         if (direction.magnitude == 0) return;
         transform.rotation = Quaternion.LookRotation(direction);
         movementDetector.gameObject.SendMessage("HighlightGroundAhead", SendMessageOptions.DontRequireReceiver);
+
+        //decide what to do if the ground ahead is occupied
+        GroundComponent groundComponent = movementDetector.GetGroundAhead();
+        if (groundComponent)
+        {
+            TurnManager characterOnTile = groundComponent.attachedCharacter;
+            if (characterOnTile)
+                if (characterOnTile.GetComponent<ShooterCharacter>().team != GetComponent<ShooterCharacter>().team) goto jump;
+            if (groundComponent.IsOccupied())
+            {
+                if (!went)
+                {
+                    //try to find another ground
+                    went = true;
+                    treatedData = Equalize(param[0], param[1], true);
+                    goto tryagain;
+                }
+                else
+                    //no ground found, pass action
+                    turnManager.EndTurn();
+            }
+        } else turnManager.EndTurn();
+        jump:;
     }
 
     public bool IsBusy()
     {
-       return !turnManager.IsTurn() || turnManager.executingAction || moving || turnManager.actionsRemaining <= 0 || (GameManager.cameraController.rotating && turnManager.playerControlled);
+        return !turnManager.IsTurn() || turnManager.executingAction || moving || turnManager.actionsRemaining <= 0 || (GameManager.cameraController.rotating && turnManager.playerControlled);
     }
 
     #region Util
-    public static float[] Equalize(float h, float v)
+    public static float[] Equalize(float h, float v, bool inverse)
     {
         float[] axis = { h, v };
-        _ = Mathf.Abs(h) > Mathf.Abs(v) ? (axis[1] = 0) : (axis[0] = 0);
+        if (!inverse)
+            _ = Mathf.Abs(h) > Mathf.Abs(v) ? (axis[1] = 0) : (axis[0] = 0);
+        else
+            _ = Mathf.Abs(h) < Mathf.Abs(v) ? (axis[1] = 0) : (axis[0] = 0);
         return axis;
     }
 

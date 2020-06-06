@@ -32,7 +32,7 @@ public class UserInput : MonoBehaviour
     private void Update()
     {
         RotateCharacter(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButton("Fire3"))
             MoveCharacter();
         if (Input.GetButtonDown("Fire2"))
             AttackCharacter();

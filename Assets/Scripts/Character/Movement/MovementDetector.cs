@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class MovementDetector : MonoBehaviour
 {
     #pragma warning disable 649
@@ -14,9 +15,18 @@ public class MovementDetector : MonoBehaviour
     [SerializeField]
     float range = 0.2f;
 
+    LineRenderer lineRenderer;
+
     protected virtual void Awake()
     {
-
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = 2;
+        lineRenderer.useWorldSpace = false;
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.01f;
+        lineRenderer.SetPosition(0, ShootSpawn.localPosition);
+        lineRenderer.SetPosition(1, AttackRange.localPosition);
+        lineRenderer.enabled = false;
     }
 
     protected virtual void Start()
@@ -80,13 +90,16 @@ public class MovementDetector : MonoBehaviour
             currentHighlighted.SetHighlight(true, Color.red);
         else
             currentHighlighted.SetHighlight(true);
+        lineRenderer.enabled = true;
     }
+
 
     public void UnhighlightGroundAhead()
     {
         if (currentHighlighted == null) return;
         currentHighlighted.SetHighlight(false);
         currentHighlighted = null;
+        lineRenderer.enabled = false;
     }
     #endregion
 }
