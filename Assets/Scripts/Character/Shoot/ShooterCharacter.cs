@@ -14,6 +14,7 @@ public class ShooterCharacter : MonoBehaviour
     public float speed = 5f;
     public float delay = 0.3f;
     public bool ranged = true;
+    public bool passThrough = false;
 
 
     private void Awake()

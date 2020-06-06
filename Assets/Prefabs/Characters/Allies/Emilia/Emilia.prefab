@@ -335,6 +335,7 @@ MonoBehaviour:
   speed: 5
   delay: 0.8
   ranged: 1
+  passThrough: 0
 --- !u!114 &9138813658381912811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,7 +377,7 @@ MonoBehaviour:
   characterName: Emilia
   characterSprite: {fileID: 0}
   playerControlled: 1
-  actionsPerTurn: 3
+  actionsPerTurn: 1
 --- !u!114 &8381793743097022065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2164,6 +2165,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MovementDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523117986760112900, guid: 90c0532cb68191a45b37c1641b0a723d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523117986760112900, guid: 90c0532cb68191a45b37c1641b0a723d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7105495859374781090, guid: 90c0532cb68191a45b37c1641b0a723d,
         type: 3}

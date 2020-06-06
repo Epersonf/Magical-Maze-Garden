@@ -42,7 +42,5 @@ public class GroundComponent : SelectableUnit
 public enum GroundType
 {
     Passable,
-    Impassable,
-    Jumpable,
-    Ramp
+    Impassable
 }

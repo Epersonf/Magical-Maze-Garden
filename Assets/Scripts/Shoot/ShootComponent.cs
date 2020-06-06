@@ -31,7 +31,8 @@ public class ShootComponent : MonoBehaviour
         if (shooter)
             if (emissor.team != shooter.team)
                 collision.gameObject.SendMessage("DealDamage", emissor.damage, SendMessageOptions.DontRequireReceiver);
-        End();
+        if (!emissor.passThrough)
+            End();
     }
 
     public void End()

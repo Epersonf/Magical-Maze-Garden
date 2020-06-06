@@ -37,9 +37,15 @@ public class AIController : MonoBehaviour
         }
         pathForEnemy = new NavMeshPath();
         navMeshAgent.CalculatePath(closestEnemy.transform.position, pathForEnemy);
+
+        if (pathForEnemy.corners.Length < 2)
+        {
+            turnManager.PassAction();
+            yield break;
+        }
+
         Vector3 direction = pathForEnemy.corners[0] - pathForEnemy.corners[1];
         yield return new WaitForSeconds(0.2f);
-        Debug.Log(direction);
         SendMessage("Rotate", new float[] { -direction.z, direction.x });
         yield return new WaitForSeconds(0.2f);
         Vector3 origin = movementDetector.GetMagicBallOrigin();
@@ -55,8 +61,10 @@ public class AIController : MonoBehaviour
         RaycastHit[] hit = Physics.RaycastAll(origin, destination - origin, Vector3.Distance(origin, destination));
         foreach (RaycastHit h in hit)
         {
-            if (h.transform.GetComponent<ShooterCharacter>().team == shooterCharacter.team) continue;
+            ShooterCharacter enemyShooter = h.transform.GetComponent<ShooterCharacter>();
+            if (enemyShooter.team == this.shooterCharacter.team) continue;
             if (h.transform.GetComponent<AliveCreature>() != null) return true;
+            if (!enemyShooter.passThrough) break;
         }
         return false;
     }
