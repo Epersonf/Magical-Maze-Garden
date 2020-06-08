@@ -82,7 +82,11 @@ public class MovementManager : MonoBehaviour
         {
             TurnManager characterOnTile = groundComponent.attachedCharacter;
             if (characterOnTile)
-                if (characterOnTile.GetComponent<ShooterCharacter>().team != GetComponent<ShooterCharacter>().team) goto jump;
+                if (characterOnTile.GetComponent<ShooterCharacter>().team != GetComponent<ShooterCharacter>().team)
+                {
+                    if (!turnManager.playerControlled) turnManager.PassAction();
+                    goto jump;
+                }
             if (groundComponent.IsOccupied())
             {
                 if (!went)
@@ -92,11 +96,9 @@ public class MovementManager : MonoBehaviour
                     treatedData = Equalize(param[0], param[1], true);
                     goto tryagain;
                 }
-                else
-                    //no ground found, pass action
-                    turnManager.EndTurn();
+                else if (!turnManager.playerControlled) turnManager.PassAction();
             }
-        } else turnManager.EndTurn();
+        } else if (!turnManager.playerControlled) turnManager.PassAction();
         jump:;
     }
 

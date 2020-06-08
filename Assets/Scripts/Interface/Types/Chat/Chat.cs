@@ -7,20 +7,18 @@ public class Chat : MonoBehaviour
 {
     public static Chat active;
 
-    public Image characterFace;
     public Text messageText;
 
 
-    public static void ShowMessage(Sprite face, string text, float delay)
+    public static void ShowMessage(string text, float delay)
     {
         if (!active) return;
         GameManager.interfaceController.showGameInterface = false;
-        active.StartCoroutine(Message(face, text, delay));
+        active.StartCoroutine(Message(text, delay));
     }
 
-    public static IEnumerator Message(Sprite face, string text, float delay)
+    public static IEnumerator Message(string text, float delay)
     {
-        active.characterFace.sprite = face;
         active.messageText.text = text;
         yield return new WaitForSeconds(delay);
         GameManager.interfaceController.showGameInterface = true;

@@ -41,7 +41,7 @@ public class InterfaceController : MonoBehaviour
     {
         if (Input.GetKeyDown("1"))
         {
-            Chat.ShowMessage(null, "Ola", 2);
+            Chat.ShowMessage("Ola", 2);
         }
     }
 }

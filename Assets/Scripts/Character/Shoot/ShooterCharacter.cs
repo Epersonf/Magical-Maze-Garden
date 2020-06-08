@@ -28,6 +28,7 @@ public class ShooterCharacter : MonoBehaviour
         if (!turnManager.IsTurn() || turnManager.executingAction) return;
         SendMessage("OnAttackEvent", SendMessageOptions.DontRequireReceiver);
         SendMessage("StartAction");
+        BroadcastMessage("UnhighlightGroundAhead");
         if (ranged)
             StartCoroutine(SpawnShoot(movementDetector.GetMagicBallOrigin(), movementDetector.GetMagicBallDestination(), delay));
         else

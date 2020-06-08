@@ -8,6 +8,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(ShooterCharacter))]
+[RequireComponent(typeof(MovementManager))]
+[RequireComponent(typeof(AnimationBehaviour))]
 public class TurnManager : MonoBehaviour
 {
     const float margin = 0.4f;
