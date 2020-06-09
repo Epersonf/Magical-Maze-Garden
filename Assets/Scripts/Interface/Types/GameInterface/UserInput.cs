@@ -31,6 +31,7 @@ public class UserInput : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.interfaceController.gameInterface.activeSelf) return;
         RotateCharacter(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         if (Input.GetButton("Fire3"))
             MoveCharacter();

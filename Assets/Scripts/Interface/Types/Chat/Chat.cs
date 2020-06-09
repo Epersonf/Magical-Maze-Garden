@@ -9,6 +9,10 @@ public class Chat : MonoBehaviour
 
     public Text messageText;
 
+    public static void ShowMessage(Message message)
+    {
+        active.messageText.text = message.text;
+    }
 
     public static void ShowMessage(string text, float delay)
     {

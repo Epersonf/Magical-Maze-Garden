@@ -251,7 +251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3831896165479548753
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1150,8 +1150,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.8, y: -330}
-  m_SizeDelta: {x: 1863.3, y: 387.8}
+  m_AnchoredPosition: {x: -14.8, y: -438.4}
+  m_SizeDelta: {x: 1863.3, y: 171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3831896166279411689
 CanvasRenderer:
@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1540,7 +1540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3831896166890654200
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1574,7 +1574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c532b2d647d4cc54fa4e6a41d99c9f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterFace: {fileID: 0}
   messageText: {fileID: 3831896167043683481}
 --- !u!1 &3831896166915848675
 GameObject:
@@ -1857,8 +1856,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.1, y: -327.9}
-  m_SizeDelta: {x: 1792.9, y: 339.6}
+  m_AnchoredPosition: {x: -19.7, y: -446.8}
+  m_SizeDelta: {x: 1798.2, y: 101.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3831896167043683478
 CanvasRenderer:

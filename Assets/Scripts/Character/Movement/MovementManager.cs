@@ -83,10 +83,7 @@ public class MovementManager : MonoBehaviour
             TurnManager characterOnTile = groundComponent.attachedCharacter;
             if (characterOnTile)
                 if (characterOnTile.GetComponent<ShooterCharacter>().team != GetComponent<ShooterCharacter>().team)
-                {
-                    if (!turnManager.playerControlled) turnManager.PassAction();
                     goto jump;
-                }
             if (groundComponent.IsOccupied())
             {
                 if (!went)

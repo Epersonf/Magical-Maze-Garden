@@ -29,6 +29,7 @@ public class AIController : MonoBehaviour
 
     private IEnumerator Execute()
     {
+        if (!GameManager.interfaceController.gameInterface.activeSelf) yield return new WaitForSeconds(1f);
         TurnManager closestEnemy = FindClosestEnemy();
         if (closestEnemy == null)
         {
@@ -51,9 +52,13 @@ public class AIController : MonoBehaviour
         Vector3 origin = movementDetector.GetMagicBallOrigin();
         Vector3 destination = movementDetector.GetMagicBallDestination();
         if (CanAttackPlayer(origin, destination))
+        {
             SendMessage("Attack");
+        }
         else
+        {
             SendMessage("Move");
+        }
     }
 
     public bool CanAttackPlayer(Vector3 origin, Vector3 destination)
