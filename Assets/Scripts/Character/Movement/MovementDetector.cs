@@ -86,10 +86,9 @@ public class MovementDetector : MonoBehaviour
             currentHighlighted.SetHighlight(false);
         if (groundAhead == null) return;
         currentHighlighted = groundAhead;
-        if (currentHighlighted.IsOccupied())
-            currentHighlighted.SetHighlight(true, Color.red);
-        else
-            currentHighlighted.SetHighlight(true);
+        Color color = Color.white;
+        if (currentHighlighted.IsOccupied()) color = Color.red;
+        lineRenderer.material.color = color;
         lineRenderer.enabled = true;
     }
 
