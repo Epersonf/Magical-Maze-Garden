@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour
     {
         active = this;
         audioSource = GetComponent<AudioSource>();
+        currentClip = 0;
     }
 
     void FixedUpdate()

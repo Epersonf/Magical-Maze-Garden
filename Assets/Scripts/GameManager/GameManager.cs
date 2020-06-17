@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateInterface()
     {
+        if (!interfaceController.updatableInterface) return;
         interfaceController.updatableInterface.UpdateTurn();
     }
 

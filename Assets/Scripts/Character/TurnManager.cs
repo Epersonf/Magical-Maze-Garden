@@ -11,6 +11,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(MovementManager))]
 [RequireComponent(typeof(AnimationBehaviour))]
 [RequireComponent(typeof(AliveCreature))]
+[RequireComponent(typeof(AIController))]
 public class TurnManager : MonoBehaviour
 {
     const float margin = 0.4f;
