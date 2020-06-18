@@ -24,6 +24,7 @@ public class MovementManager : MonoBehaviour
         if (attachedGround == null) Debug.LogError("Please, set the AttachedGround in the inspector. " + transform.name);
         movementDetector = GetComponentInChildren<MovementDetector>();
         turnManager = GetComponent<TurnManager>();
+        attachedGround.AttachCharacter(turnManager);
         characterController = GetComponent<CharacterController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.angularSpeed = 0;

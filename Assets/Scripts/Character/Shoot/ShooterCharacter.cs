@@ -13,6 +13,7 @@ public class ShooterCharacter : MonoBehaviour
     public int damage = 1;
     public float speed = 5f;
     public float delay = 0.3f;
+    public float afterDelay = 0.3f;
     public bool ranged = true;
     public bool passThrough = false;
 
@@ -38,8 +39,12 @@ public class ShooterCharacter : MonoBehaviour
     public IEnumerator HitAhead(TurnManager characterComponent, float delay)
     {
         yield return new WaitForSeconds(delay);
+        Debug.Log(characterComponent);
         if (characterComponent && team != characterComponent.GetComponent<ShooterCharacter>().team)
+        {
             characterComponent.gameObject.SendMessage("DealDamage", damage, SendMessageOptions.DontRequireReceiver);
+        }
+        yield return new WaitForSeconds(afterDelay);
         SendMessage("EndAction");
     }
 
