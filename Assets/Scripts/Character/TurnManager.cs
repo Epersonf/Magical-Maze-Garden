@@ -25,7 +25,7 @@ public class TurnManager : MonoBehaviour
     public int actionsRemaining { get => ActionsRemaining; }
 
 
-    private void Start()
+    private void Awake()
     {
         GameManager.active.SendMessage("AddCharacter", this, SendMessageOptions.DontRequireReceiver);
     }

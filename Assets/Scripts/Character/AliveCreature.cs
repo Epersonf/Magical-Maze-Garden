@@ -49,6 +49,7 @@ public class AliveCreature : MonoBehaviour
         Died = true;
         gameObject.SendMessage("OnDieEvent", SendMessageOptions.DontRequireReceiver);
         Destroy(gameObject, 3);
+        GameManager.active.NextLevel();
         this.enabled = false;
     }
 }

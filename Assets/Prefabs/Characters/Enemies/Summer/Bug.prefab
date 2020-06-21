@@ -163,8 +163,8 @@ MonoBehaviour:
   damage: 1
   speed: 5
   delay: 0.3
+  afterDelay: 0.3
   ranged: 0
-  passThrough: 0
 --- !u!114 &7511831779539990148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   characterName: Bug
   characterSprite: {fileID: 0}
   playerControlled: 0
-  actionsPerTurn: 3
+  actionsPerTurn: 2
 --- !u!114 &8339659967798829778
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
         active = this;
         cameraController = GameObject.FindGameObjectWithTag("CameraParent").GetComponent<CameraController>();
         interfaceController = GameObject.FindGameObjectWithTag("InterfaceController").GetComponent<InterfaceController>();
+        if (!interfaceController) Debug.LogError("No InterfaceController found.");
     }
     #endregion
 
@@ -67,7 +68,6 @@ public class GameManager : MonoBehaviour
         get => Turn;
         set
         {
-            NextLevel();
             GetPlayingCharacter().BroadcastMessage("UnhighlightGroundAhead");
             if (value >= 0 && value < characters.Count) Turn = value;
             else Turn = 0;
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(NextScene);
     }
 
-    public bool GameEnded()
+    private bool GameEnded()
     {
         foreach (TurnManager player in characters)
             if (!player.playerControlled) return false;

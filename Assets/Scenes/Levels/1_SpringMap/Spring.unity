@@ -25291,7 +25291,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1134445708 stripped
 GameObject:
@@ -30070,9 +30070,9 @@ MonoBehaviour:
   messages:
   - text: 'Villager: We are under attack!!!'
   - text: 'Mildred: We need to defend our village!'
-  - text: 'Emilia: Who are they?'
-  - text: 'Mildred: They are'
-  - text: 'Tree Enemy: Human... bad...'
+  - text: 'Emilia: What''s happening?'
+  - text: 'Mildred: I don''t know...'
+  - text: 'Tree Spirit: Human... bad...'
 --- !u!1001 &1381975555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35820,7 +35820,7 @@ PrefabInstance:
     - target: {fileID: 2451504013273037550, guid: 28a093450e3a6aa4b835dc7ce4b02acd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2451504013273037550, guid: 28a093450e3a6aa4b835dc7ce4b02acd,
         type: 3}
@@ -52439,7 +52439,7 @@ PrefabInstance:
     - target: {fileID: 6175655974293458357, guid: b28ce1bec0f826e4781971485dea77cf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6175655974293458357, guid: b28ce1bec0f826e4781971485dea77cf,
         type: 3}
@@ -52697,7 +52697,7 @@ PrefabInstance:
     - target: {fileID: 8750297261585989514, guid: f5952d135633af54799a859d71cba671,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8750297261585989514, guid: f5952d135633af54799a859d71cba671,
         type: 3}
