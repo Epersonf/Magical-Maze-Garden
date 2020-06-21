@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 591e1ee5336c44d429f287eeeac224f7
   - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: cec866588dfc924498b8a12826727cf9
+  - enabled: 1
     path: Assets/Scenes/Levels/1_SpringMap/Spring.unity
     guid: 1e3c5197063106b46b91a7dbe55e4d96
   - enabled: 1

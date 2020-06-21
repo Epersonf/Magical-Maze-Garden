@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 535e71141b31cf04eaf8b88ed4f61701
+guid: 00421a2799da3024580875556b077049
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Sand
-    second: {fileID: 2100000, guid: a857bf1d221af0448bc7b086d6de29b0, type: 2}
+      name: TreeWood
+    second: {fileID: 2100000, guid: 06fba5f42b0a82c4da9a81a609fa0bce, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

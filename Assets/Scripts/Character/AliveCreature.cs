@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator))]
 public class AliveCreature : MonoBehaviour
@@ -46,7 +47,8 @@ public class AliveCreature : MonoBehaviour
     public void Die()
     {
         Died = true;
-        Destroy(gameObject, 3);
         gameObject.SendMessage("OnDieEvent", SendMessageOptions.DontRequireReceiver);
+        Destroy(gameObject, 3);
+        this.enabled = false;
     }
 }

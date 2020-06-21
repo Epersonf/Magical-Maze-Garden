@@ -75,5 +75,6 @@ public class TurnManager : MonoBehaviour
     public void OnDieEvent()
     {
         GameManager.active.RemoveCharacter(this);
+        this.enabled = false;
     }
 }

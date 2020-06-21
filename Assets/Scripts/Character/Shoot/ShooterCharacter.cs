@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(TurnManager))]
 public class ShooterCharacter : MonoBehaviour
 {
     TurnManager turnManager;
@@ -15,7 +14,6 @@ public class ShooterCharacter : MonoBehaviour
     public float delay = 0.3f;
     public float afterDelay = 0.3f;
     public bool ranged = true;
-    public bool passThrough = false;
 
 
     private void Awake()
@@ -39,7 +37,6 @@ public class ShooterCharacter : MonoBehaviour
     public IEnumerator HitAhead(TurnManager characterComponent, float delay)
     {
         yield return new WaitForSeconds(delay);
-        Debug.Log(characterComponent);
         if (characterComponent && team != characterComponent.GetComponent<ShooterCharacter>().team)
         {
             characterComponent.gameObject.SendMessage("DealDamage", damage, SendMessageOptions.DontRequireReceiver);
@@ -54,4 +51,11 @@ public class ShooterCharacter : MonoBehaviour
         GameObject shoot = Instantiate(prefab, origin, transform.rotation);
         shoot.GetComponent<ShootComponent>().SetDestination(destination, this);
     }
+
+    #region Events
+    public void OnDieEvent()
+    {
+        this.enabled = false;
+    }
+    #endregion
 }

@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         get => Turn;
         set
         {
+            NextLevel();
             GetPlayingCharacter().BroadcastMessage("UnhighlightGroundAhead");
             if (value >= 0 && value < characters.Count) Turn = value;
             else Turn = 0;
@@ -88,9 +89,26 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region NextLevel
     public string NextScene = "Spring";
-    public void GameOver()
+    public void NextLevel()
     {
+        if (!GameEnded()) return;
         SceneManager.LoadScene(NextScene);
     }
+
+    public bool GameEnded()
+    {
+        foreach (TurnManager player in characters)
+            if (!player.playerControlled) return false;
+        return true;
+    }
+    #endregion
+
+    #region GameOver
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+    #endregion
 }

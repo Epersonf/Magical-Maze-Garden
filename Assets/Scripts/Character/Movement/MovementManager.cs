@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(TurnManager))]
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class MovementManager : MonoBehaviour
@@ -12,6 +11,7 @@ public class MovementManager : MonoBehaviour
     private TurnManager turnManager;
     private CharacterController characterController;
     private NavMeshAgent navMeshAgent;
+    private Collider clldr;
     [SerializeField]
     private GroundComponent AttachedGround = null;
     public GroundComponent attachedGround { get => AttachedGround; }
@@ -28,6 +28,7 @@ public class MovementManager : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.angularSpeed = 0;
+        clldr = GetComponent<Collider>();
     }
 
     private void Update()
@@ -104,6 +105,16 @@ public class MovementManager : MonoBehaviour
     {
         return !turnManager.IsTurn() || turnManager.executingAction || moving || turnManager.actionsRemaining <= 0 || (GameManager.cameraController.rotating && turnManager.playerControlled);
     }
+
+    #region Events
+    public void OnDieEvent()
+    {
+        attachedGround.DettachCharacter();
+        clldr.enabled = false;
+        characterController.enabled = false;
+        navMeshAgent.enabled = false;
+    }
+    #endregion
 
     #region Util
     public static float[] Equalize(float h, float v, bool inverse)

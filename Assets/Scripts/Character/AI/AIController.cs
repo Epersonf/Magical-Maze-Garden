@@ -68,9 +68,8 @@ public class AIController : MonoBehaviour
         {
             ShooterCharacter enemyShooter = h.transform.GetComponent<ShooterCharacter>();
             if (enemyShooter == null) continue;
-            if (enemyShooter.team == this.shooterCharacter.team) continue;
-            if (h.transform.GetComponent<AliveCreature>() != null) return true;
-            if (!enemyShooter.passThrough) break;
+            if (enemyShooter.team == this.shooterCharacter.team || !enemyShooter.enabled) continue;
+            return true;
         }
         return false;
     }
