@@ -52,13 +52,10 @@ public class AIController : MonoBehaviour
         Vector3 origin = movementDetector.GetMagicBallOrigin();
         Vector3 destination = movementDetector.GetMagicBallDestination();
         if (CanAttackPlayer(origin, destination))
-        {
             SendMessage("Attack");
-        }
         else
-        {
             SendMessage("Move");
-        }
+        if (!turnManager.executingAction) SendMessage("Attack");
     }
 
     public bool CanAttackPlayer(Vector3 origin, Vector3 destination)
