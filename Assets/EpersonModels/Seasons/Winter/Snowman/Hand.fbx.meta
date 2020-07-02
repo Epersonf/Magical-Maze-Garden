@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: 09bc6fe774efea248ba51d04973d203f
+guid: 9b0d67278ae78dc4e867e3e0774889c6
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Carrot
-    second: {fileID: 2100000, guid: f6df0495c5b61dd42abdb633ebb0191b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Eye
-    second: {fileID: 2100000, guid: 872212db51b81624da4928178b12b5b6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Eyebrow
-    second: {fileID: 2100000, guid: 872212db51b81624da4928178b12b5b6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Snow
-    second: {fileID: 2100000, guid: 596de5dcf973b454690aa4ee5af990da, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0

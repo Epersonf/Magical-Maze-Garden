@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
     #region GameOver
     public void GameOver()
     {
+        TryAgain.lastLevel = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene("GameOver");
     }
     #endregion
